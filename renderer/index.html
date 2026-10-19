@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; script-src 'self'">
+  <title>Harness Manager</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Harness Manager <span class="tagline">config manager for AI coding agents</span></h1>
+    <div class="tabs" id="tabs">
+      <button data-f="all" class="on">All <span id="n-all"></span></button>
+      <button data-f="installed">Installed <span id="n-installed"></span></button>
+      <button data-f="missing">Not installed <span id="n-missing"></span></button>
+      <button data-f="updates" data-tip="Installed harnesses with a newer release available. Press Check updates to refresh.">Updates <span id="n-updates"></span></button>
+    </div>
+    <div class="spacer"></div>
+    <button id="btn-check" data-tip="Look online for newer releases of every installed harness (cached for an hour; this forces a fresh check).">Check updates</button>
+    <button id="btn-refresh" data-tip="Scan this computer again for installed harnesses and their versions.">Rescan</button>
+    <button id="btn-proxy" data-tip="Set where your CLIProxyAPI gateway runs and its API key. Each harness can then be pointed at it with its Proxy button.">CLIProxyAPI</button>
+    <button id="btn-open" data-tip="Open the folder where all backups are stored.">Backups folder</button>
+  </header>
+  <section id="intro">
+    <div>
+      <b>Keep your AI coding-agent CLIs safe and up to date.</b>
+      This lists the agents ("harnesses") like Claude Code, Codex, Gemini and OpenCode that are on this machine and the ones that aren't.
+      <span class="steps"><b>Backup</b> saves a harness's config files (not chats or logs) to <code>~/backups/harness-configs</code> &middot;
+      <b>Restore</b> puts a backup back, snapshotting what it replaces &middot; <b>Edit</b> changes a config file safely &middot;
+      <b>Update</b> runs the harness's own upgrade command &middot; <b>Proxy</b> points a harness at your CLIProxyAPI gateway. <span class="dotkey"><i class="dot on"></i> binary found <i class="dot cfg"></i> config only <i class="dot"></i> not installed</span></span>
+    </div>
+    <button id="intro-x" data-tip="Hide this banner for good.">Got it</button>
+  </section>
+  <main><table>
+    <thead><tr><th class="c-dot"></th><th>Harness</th><th>Version <span class="help" data-tip="The installed version, read from the program's own --version output." tabindex="0">?</span></th><th>Latest <span class="help" data-tip="The newest release found online (npm, PyPI, GitHub, or the tool's own check). An orange ↑ means an update is available." tabindex="0">?</span></th><th>Location <span class="help" data-tip="Where the program was found. &#39;config only&#39; = no program found but a config folder exists; +N = other copies exist." tabindex="0">?</span></th><th class="actions"></th></tr></thead>
+    <tbody id="rows"></tbody>
+  </table><p id="empty" hidden>Nothing to show.</p></main>
+  <footer id="status">Scanning…</footer>
+  <div id="modal" hidden><div class="card" id="card"></div></div>
+  <script src="app.js"></script>
+</body>
+</html>

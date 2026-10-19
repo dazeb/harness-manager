@@ -1,0 +1,58 @@
+{
+  "name": "harness-manager",
+  "productName": "Harness Manager",
+  "version": "0.1.0",
+  "description": "Back up, edit, restore and update the configs of AI coding-agent CLIs",
+  "main": "main.js",
+  "author": "dazeb",
+  "desktopName": "harness-manager.desktop",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron . --no-sandbox",
+    "test": "node test/test.js && node test/proxy.test.js",
+    "dist": "electron-builder --linux AppImage"
+  },
+  "dependencies": {
+    "jsonc-parser": "^3.3.1",
+    "smol-toml": "^1.9.1",
+    "yaml": "^2.9.1"
+  },
+  "devDependencies": {
+    "electron": "^44.9.0",
+    "electron-builder": "^26.15.3"
+  },
+  "build": {
+    "appId": "dev.dazeb.harness-manager",
+    "productName": "Harness Manager",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "lib/**",
+      "renderer/**",
+      "package.json"
+    ],
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "category": "Development",
+      "syncDesktopName": true,
+      "executableArgs": [
+        "--no-sandbox"
+      ],
+      "artifactName": "Harness-Manager-${version}-x86_64.AppImage",
+      "icon": "build/icon.png"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dazeb/harness-manager.git"
+  },
+  "homepage": "https://github.com/dazeb/harness-manager#readme",
+  "bugs": {
+    "url": "https://github.com/dazeb/harness-manager/issues"
+  }
+}
